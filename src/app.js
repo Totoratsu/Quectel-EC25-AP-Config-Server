@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const routes = require('./routes');
+const morgan = require('morgan');
 
 const app = express();
 const {
@@ -9,6 +10,7 @@ const {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(morgan('dev'));
 app.set('views', path.join('src', 'views'));
 app.set('view engine', 'pug');
 
