@@ -1,7 +1,27 @@
 doctype html
 html
   head
-    title Orbittas Console
+    title RPI Console
   body
-    h1 Orbittas Console
+    h1 RPI Console
     
+    h2 QMI
+
+    p To be able to connect via QMI you must install the drivers first.
+
+    form(action="/install", method="get")
+      button(type="submit") Install Drivers
+
+    h3 Simple Connection
+    form(action="/simple_qmi", method="post")
+      label(for="text") APN: 
+        input(type="text" name="apn") 
+      
+      button(type="submit") Connect
+
+    h3 Auto Connect on reboot
+    form(action="/auto_qmi", method="post")
+      label(for="text") APN: 
+        input(type="text" name="apn") 
+      
+      button(type="submit") Connect
