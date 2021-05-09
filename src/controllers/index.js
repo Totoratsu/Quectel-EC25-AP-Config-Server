@@ -19,9 +19,8 @@ class Controllers {
             }
 
             console.log(`stdout: ${stdout}`);
+            res.send('<h1>OK</h1>');
         });
-
-        res.send('<h1>OK</h1>');
     }
 
     simple_qmi(req, res) {
@@ -39,9 +38,8 @@ class Controllers {
             }
 
             console.log(`stdout: ${stdout}`);
+            res.send('<h1>OK</h1>');
         });
-
-        res.send('<h1>OK</h1>');
     }
 
     auto_qmi(req, res) {
@@ -59,9 +57,8 @@ class Controllers {
             }
 
             console.log(`stdout: ${stdout}`);
+            res.send('<h1>OK</h1>');
         });
-
-        res.send('<h1>OK</h1>');
     }
 }
 
