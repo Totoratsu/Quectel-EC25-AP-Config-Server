@@ -47,7 +47,7 @@ case $(uname -r) in
 esac
 
 echo "${YELLOW}Installing udhcpc${SET}"
-apt install udhcpc
+apt install -y udhcpc
 
 echo "denyinterfaces wwan0" >> /etc/dhcpcd.conf
 sudo systemctl daemon-reload
