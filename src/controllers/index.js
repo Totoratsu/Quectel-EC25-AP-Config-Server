@@ -1,4 +1,4 @@
-const { exec } = require("child_process");
+const { exec, cd, echo } = require("shelljs");
 
 class Controllers {
     // Views
@@ -8,60 +8,56 @@ class Controllers {
 
     // Functions
     install(req, res) {
-        exec('sudo ./src/scripts/init.sh', (error, stdout, stderr) => {
-            if (error) {
-                console.log(`error: ${error.message}`);
-                return;
-            }
-            if (stderr) {
-                console.log(`stderr: ${stderr}`);
-                return;
-            }
+        cd('src/scripts');
 
-            console.log(`stdout: ${stdout}`);
+        echo("UPDATING SYSTEM");
+        exec('sudo apt update -y && sudo apt upgrade -y');
+
+        echo("INSTALLING DEPENDENCIES");
+        exec("sudo apt-get install -y raspberrypi-kernel-headers");
+
+        exec("sudo chmod +x ./qmi_install.sh");
+        exec("sudo chmod +x ./qmi_auto_connect.sh");
+
+        echo("EXECUTING qmi_install.sh");
+        exec('sudo ./qmi_install.sh', function (code, stdout, stderr) {
+            console.log('Exit code:', code);
+            console.log('Program output:', stdout);
+            console.log('Program stderr:', stderr);
+
+            echo("DONE");
+            res.send('<h1>OK</h1>');
         });
-
-        res.status(200);
     }
 
     simple_qmi(req, res) {
         const { apn } = req.body;
-        const command = `sudo files/quectel-CM/quectel-CM.sh -s ${apn}`;
+        const command = `sudo ./quectel-CM.sh -s ${apn}`;
 
-        exec(command, (error, stdout, stderr) => {
-            if (error) {
-                console.log(`error: ${error.message}`);
-                return;
-            }
-            if (stderr) {
-                console.log(`stderr: ${stderr}`);
-                return;
-            }
+        cd("/home/pi/files/quectel-CM");
+        exec(command, function (code, stdout, stderr) {
+            console.log('Exit code:', code);
+            console.log('Program output:', stdout);
+            console.log('Program stderr:', stderr);
 
-            console.log(`stdout: ${stdout}`);
+            echo("DONE");
+            res.send('<h1>OK</h1>');
         });
-
-        res.status(200);
     }
 
     auto_qmi(req, res) {
         const { apn } = req.body;
-        const command = `sudo ./src/scripts/qmi_auto_connect.sh ${apn}`;
+        const command = `sudo ./qmi_auto_connect.sh ${apn}`;
 
-        exec(command, (error, stdout, stderr) => {
-            if (error) {
-                console.log(`error: ${error.message}`);
-                return;
-            }
-            if (stderr) {
-                console.log(`stderr: ${stderr}`);
-                return;
-            }
+        cd('src/scripts');
+        exec(command, function (code, stdout, stderr) {
+            console.log('Exit code:', code);
+            console.log('Program output:', stdout);
+            console.log('Program stderr:', stderr);
 
-            console.log(`stdout: ${stdout}`);
+            echo("DONE");
+            res.send('<h1>OK</h1>');
         });
-
-        res.status(200);
     }
 }
 
