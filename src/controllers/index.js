@@ -34,7 +34,7 @@ class Controllers {
         const { apn } = req.body;
         const command = `sudo ./quectel-CM.sh -s ${apn}`;
 
-        cd("files/quectel-CM");
+        cd("/home/pi/files/quectel-CM");
         exec(command, function (code, stdout, stderr) {
             console.log('Exit code:', code);
             console.log('Program output:', stdout);
