@@ -32,7 +32,7 @@ class Controllers {
 
     simple_qmi(req, res) {
         const { apn } = req.body;
-        const command = `sudo ./quectel-CM.sh -s ${apn}`;
+        const command = `sudo ./quectel-CM -s ${apn}`;
 
         cd("/home/pi/files/quectel-CM");
         exec(command, function (code, stdout, stderr) {
