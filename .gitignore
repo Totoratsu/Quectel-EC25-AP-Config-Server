@@ -1,1 +1,3 @@
 /node_modules
+# I use npm install on the rpi and yarn install on pc
+package-lock.json
