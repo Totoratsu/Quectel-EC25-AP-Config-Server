@@ -8,7 +8,7 @@ class Controllers {
 
     // Functions
     install(req, res) {
-        cd('../scripts');
+        cd('src/scripts');
 
         echo("UPDATING SYSTEM");
         exec('sudo apt update -y && sudo apt upgrade -y');
@@ -34,7 +34,7 @@ class Controllers {
         const { apn } = req.body;
         const command = `sudo ./quectel-CM.sh -s ${apn}`;
 
-        cd("files/quectel-CM")
+        cd("files/quectel-CM");
         exec(command, function (code, stdout, stderr) {
             console.log('Exit code:', code);
             console.log('Program output:', stdout);
@@ -49,7 +49,7 @@ class Controllers {
         const { apn } = req.body;
         const command = `sudo ./qmi_auto_connect.sh ${apn}`;
 
-        cd('../scripts');
+        cd('src/scripts');
         exec(command, function (code, stdout, stderr) {
             console.log('Exit code:', code);
             console.log('Program output:', stdout);
