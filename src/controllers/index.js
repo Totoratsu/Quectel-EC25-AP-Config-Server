@@ -1,4 +1,4 @@
-const { exec, cd, echo } = require("shelljs");
+const { exec, cd, echo, chmod } = require("shelljs");
 
 class Controllers {
     // Views
@@ -16,8 +16,8 @@ class Controllers {
         echo("INSTALLING DEPENDENCIES");
         exec("sudo apt-get install -y raspberrypi-kernel-headers");
 
-        exec("sudo chmod +x ./qmi_install.sh");
-        exec("sudo chmod +x ./qmi_auto_connect.sh");
+        chmod("+x", "qmi_install.sh");
+        chmod("+x", "qmi_auto_connect.sh");
 
         echo("EXECUTING qmi_install.sh");
         exec('sudo ./qmi_install.sh', function (code, stdout, stderr) {

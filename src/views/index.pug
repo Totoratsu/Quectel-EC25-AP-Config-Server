@@ -1,27 +1,43 @@
 doctype html
 html
   head
-    title RPI Console
+    title AP Config Server
+
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0' crossorigin='anonymous')
   body
-    h1 RPI Console
-    
-    h2 QMI
+    .container 
+      h1.text-center Quectel EC25/21 AP Config Server
 
-    p To be able to connect via QMI you must install the drivers first.
+      p.pt-4 These configurations are fully functional on RPI3 model B, B+ and 4 with RaspiOS and sixfab shields.
+      br
 
-    form(action="/install", method="get")
-      button(type="submit") Install Drivers
+      h2 QMI
+      hr
 
-    h3 Simple Connection
-    form(action="/simple_qmi", method="post")
-      label(for="text") APN: 
-        input(type="text" name="apn") 
+      p
+        | To be able to connect via QMI you must install the drivers first, this will restart your RPI.
+        | You can found a manual guide on 
+        a(href="https://sixfab.com/qmi-interface-with-sixfab-shields-hats/", target="_blank", rel="noopener noreferrer") sixfab.
+
+      form(action="/install" method="get")
+        button.btn.btn-success(type="submit") Install Drivers
       
-      button(type="submit") Connect
+      h3.pt-4 Simple Connection
+      p 
+        | If the connection is stablished, this command would be endless.
+      form(action="/simple_qmi" method="post")
+        label.form-label(for='apn') APN
+        .row 
+          .col 
+            input#inputPassword5.form-control(type='text' aria-describedby='apn')
+          .col
+            button.btn.btn-primary(type="submit") Connect
 
-    h3 Auto Connect on reboot
-    form(action="/auto_qmi", method="post")
-      label(for="text") APN: 
-        input(type="text" name="apn") 
-      
-      button(type="submit") Connect
+      h3.pt-4 Auto Connect on reboot
+      form(action="/auto_qmi" method="post")
+        label.form-label(for='apn') APN
+        .row 
+          .col 
+            input#inputPassword5.form-control(type='text' aria-describedby='apn')
+          .col
+            button.btn.btn-primary(type="submit") Set
