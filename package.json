@@ -1,8 +1,8 @@
 {
-  "name": "node-console",
+  "name": "Quectel-EC25-AP-Config-Server",
   "version": "1.0.0",
   "main": "app.js",
-  "repository": "https://github.com/Totoratsu/node-console",
+  "repository": "https://github.com/Totoratsu/Quectel-EC25-AP-Config-Server",
   "author": "Totoratsu",
   "license": "MIT",
   "private": true,
